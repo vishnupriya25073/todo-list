@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+</head>
+<style>
+    
+</style>
+<body>
+    <div class="container">
+        <form>
+            <h2>Todo list </h2>
+            <input type="text" id="input" placeholder="Enter your Todo">
+            <button type="submit" class="addbtn">Add</button>
+        </form>
+
+    </div>
+    <div class="todolist">
+
+    </div>
+    <script>
+        let button=document.getElementsByClassName('addbtn');
+        let todolist=document.getElementById('todolist');
+        let input=document.getElementsByClassName('input');
+        //local storage
+        let todos=[];
+        window.onload=()=>{
+            todos=JSON.parse(localStorage.getItem('todos'))||[]
+        }
+        window.onload
+          button.addEventListener('click',()=>{
+            todos.push(input.value)
+            console.log(todos)
+            addtodo(input.value)
+            input.value=''
+          })
+          function addtodo(todo){
+            let para=document.createElement('p');
+            para.innerHTML=todos;
+            todolist.appendChild(para)
+            localStorage.setItem('todos',JSON.stringfy(todos))
+            para.addEventListener('click',()=>{
+               para.style.textDecoration='linet-hrough'
+               remove(todo) 
+            })
+            para.addEventListener('dblclick',()=>{
+                todolist.removeChild(para)
+                remove(todo) 
+            })
+          }
+          function remove(todo){
+             let index = todos.indesof(todo)
+             if(index>-1)
+             todos.splice(index,1)
+          }
+
+    </script>
+</body>
+</html>
